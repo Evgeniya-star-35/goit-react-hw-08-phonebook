@@ -1,4 +1,4 @@
-// import { connect } from 'react-redux';
+import { Routes, Route, Link } from 'react-router-dom';
 import Container from '../Container';
 import Form from '../Form';
 import Filter from '../Filter';
@@ -15,6 +15,9 @@ function App() {
       <h2 className={s.contactTitle}>Contacts</h2>
       <ContactList />
     </Container>
+    // <Routes>
+    //   <Route path= "/" element={}/>
+    //   </Routes>
   );
 }
 // const mapStateToProps = state => {
