@@ -1,14 +1,15 @@
-import { Routes, Route, Link } from 'react-router-dom';
+// import { Routes, Route, Link } from 'react-router-dom';
 import Container from '../Container';
 import Form from '../Form';
 import Filter from '../Filter';
 import ContactList from '../ContactsList';
-// import actions from '../../redux/Phonebook/phonebook-actions';
+import AppBar from '../AppBar';
 import s from './App.module.css';
 
 function App() {
   return (
     <Container>
+      {/* <AppBar /> */}
       <h1 className={s.title}>Phonebook</h1>
       <Form />
       <Filter />
