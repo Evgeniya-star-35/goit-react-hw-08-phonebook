@@ -9,7 +9,7 @@ import s from './App.module.css';
 function App() {
   return (
     <Container>
-      {/* <AppBar /> */}
+      <AppBar />
       <h1 className={s.title}>Phonebook</h1>
       <Form />
       <Filter />
@@ -21,12 +21,5 @@ function App() {
     //   </Routes>
   );
 }
-// const mapStateToProps = state => {
-//   return {
-//     contacts: state,
-//   };
-// };
-// const mapDispatchToProps = dispatch => ({
-//   addNote: text => dispatch(actions.addContact(text)),
-// });
+
 export default App;

@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/auth/auth-operations';
-import s from './Login.module.css';
+import { registration } from '../../redux/auth/auth-operations';
+import s from './Registration.module.css';
 
-export default function LoginView() {
+export default function RegisterView() {
   const dispatch = useDispatch();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
+      case 'name':
+        return setName(value);
       case 'email':
         return setEmail(value);
       case 'password':
@@ -21,16 +24,22 @@ export default function LoginView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(registration({ name, email, password }));
+    setName('');
     setEmail('');
     setPassword('');
   };
 
   return (
-    <div>
-      <h1>Log in to</h1>
+    <>
+      <h1>Registration</h1>
 
       <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
+        <label className={s.label}>
+          Name
+          <input type="text" name="name" value={name} onChange={handleChange} />
+        </label>
+
         <label className={s.label}>
           Email
           <input
@@ -51,8 +60,8 @@ export default function LoginView() {
           />
         </label>
 
-        <button type="submit">Sign in</button>
+        <button type="submit">Sign up</button>
       </form>
-    </div>
+    </>
   );
 }
