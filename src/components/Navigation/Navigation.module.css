@@ -8,6 +8,6 @@
   }
   .activeLink {
       composes: link;
-    color: #E84A5F;
+    color: rgb(57, 91, 202);
     text-shadow:3px 3px 10px red,-3px -3px 10px yellow;
   }

@@ -2,6 +2,10 @@
   
   .title {
     font-weight: 500;
-    font-size: 48;
+    font-size: 60;
     text-align: center;
+    margin-top: 150px;
+    text-shadow:3px 3px 10px red,-3px -3px 10px yellow;
+    color: rgb(57, 91, 202);
   }
+ 

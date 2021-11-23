@@ -1,8 +1,8 @@
 import s from './HomePage.module.css';
 const HomePage = () => (
-  <>
-    <h1 style={s.title}>Welcome page of our service!</h1>
-  </>
+  <div className={s.body}>
+    <h1 className={s.title}>Welcome !</h1>
+  </div>
 );
 
 export default HomePage;

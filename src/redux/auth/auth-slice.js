@@ -11,39 +11,33 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducer: {
-    [registration.fulfilled]: (state, { payload }) => ({
-      ...state,
-      user: payload.user,
-      token: payload.token,
-      isLoggerIn: true,
-    }),
-    [login.fulfilled]: (state, { payload }) => ({
-      ...state,
-      user: payload.user,
-      token: payload.token,
-      isLoggerIn: true,
-    }),
-    [logOut.fulfilled]: state => ({
-      ...state,
-      user: { name: null, email: null },
-      token: null,
-      isLoggerIn: false,
-    }),
-    [getCurrentUser.pending]: state => ({
-      ...state,
-      isFetchingCurrentUser: true,
-    }),
-    [getCurrentUser.fulfilled]: (state, { payload }) => ({
-      ...state,
-      user: payload,
-      isLoggedIn: true,
-      isLoggedIn: false,
-    }),
+    [registration.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
+    [login.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
+    [logOut.fulfilled](state, action) {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    },
+    [getCurrentUser.pending](state) {
+      state.isFetchingCurrentUser = true;
+    },
+    [getCurrentUser.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isLoggedIn = false;
+    },
 
-    [getCurrentUser.rejected]: state => ({
-      ...state,
-      isFetchingCurrentUser: false,
-    }),
+    [getCurrentUser.rejected](state) {
+      state.isFetchingCurrentUser = false;
+    },
   },
 });
 export default authSlice.reducer;

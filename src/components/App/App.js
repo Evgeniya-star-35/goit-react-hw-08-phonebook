@@ -1,25 +1,78 @@
-// import { Routes, Route, Link } from 'react-router-dom';
-import Container from '../Container';
-import Form from '../Form';
-import Filter from '../Filter';
-import ContactList from '../ContactsList';
-import AppBar from '../AppBar';
-import s from './App.module.css';
+import { Suspense, lazy, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import AppBar from '../AppBar/AppBar';
+import { getIsFetchingCurrent } from '../../redux/auth/auth-selectors';
+import PrivateRoute from '../PrivatRoute/PrivatRoute';
+import PublicRoute from '../PublicRoute/PublicRoute';
+import Container from '../../components/Container';
 
-function App() {
+import { getCurrentUser } from '../../redux/auth/auth-operations';
+
+// import s from './App.module.css';
+
+const HomePage = lazy(() =>
+  import(
+    '../../pages/HomePage/HomePage.js' /* webpackChunkName: "home-page" */
+  ),
+);
+const Registration = lazy(() =>
+  import(
+    '../../pages/Registration/Registration.js' /* webpackChunkName: "register-page" */
+  ),
+);
+const Login = lazy(() =>
+  import('../../pages/Login/Login.js' /* webpackChunkName: "login-page" */),
+);
+const Phonebook = lazy(() =>
+  import(
+    '../../pages/Phonebook/Phonebook.js' /* webpackChunkName: "phonebook-page" */
+  ),
+);
+const NotFoundPage = lazy(() =>
+  import(
+    '../../pages/NoFoundPage/NoFoundPage.js' /* webpackChunkName: "not-found-page" */
+  ),
+);
+
+const App = () => {
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
   return (
-    <Container>
+    <>
       <AppBar />
-      <h1 className={s.title}>Phonebook</h1>
-      <Form />
-      <Filter />
-      <h2 className={s.contactTitle}>Contacts</h2>
-      <ContactList />
-    </Container>
-    // <Routes>
-    //   <Route path= "/" element={}/>
-    //   </Routes>
+      <Container>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <PublicRoute
+              path="/register"
+              restricted
+              redirectTo="/contacts"
+              component={Registration}
+            />
+            <PublicRoute
+              path="/login"
+              restricted
+              redirectTo="/contacts"
+              component={Login}
+            />
+            <PrivateRoute
+              path="/contacts"
+              restricted
+              redirectTo="/login"
+              component={Phonebook}
+            />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </Suspense>
+      </Container>
+    </>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 // import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/Phonebook/phonebook-selectors';
@@ -11,6 +12,16 @@ export default function Form() {
   const [phone, setPhone] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const goToContacts = useRef(false);
+
+  useEffect(() => {
+    if (!goToContacts.current) {
+      goToContacts.current = true;
+      return;
+    }
+    history.push('/contacts');
+  }, [history, contacts]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
