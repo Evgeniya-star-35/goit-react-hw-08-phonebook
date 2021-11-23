@@ -1,6 +1,8 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import AppBar from '../AppBar/AppBar';
 import { getIsFetchingCurrent } from '../../redux/auth/auth-selectors';
 import PrivateRoute from '../PrivatRoute/PrivatRoute';
@@ -37,7 +39,7 @@ const NotFoundPage = lazy(() =>
 
 const App = () => {
   const dispatch = useDispatch();
-  const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
+  // const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(getCurrentUser());
@@ -46,7 +48,7 @@ const App = () => {
     <>
       <AppBar />
       <Container>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <PublicRoute
