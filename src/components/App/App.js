@@ -15,9 +15,9 @@ const HomePage = lazy(() =>
     '../../pages/HomePage/HomePage.js' /* webpackChunkName: "home-page" */
   ),
 );
-const Registration = lazy(() =>
+const Register = lazy(() =>
   import(
-    '../../pages/Registration/Registration.js' /* webpackChunkName: "register-page" */
+    '../../pages/Register/Register.js' /* webpackChunkName: "register-page" */
   ),
 );
 const Login = lazy(() =>
@@ -46,7 +46,7 @@ const App = () => {
               <PublicRoute exact path="/" component={HomePage}></PublicRoute>
 
               <PublicRoute path="/register" redirectTo="/" restricted>
-                <Registration />
+                <Register />
               </PublicRoute>
 
               <PublicRoute

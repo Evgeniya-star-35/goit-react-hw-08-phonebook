@@ -10,7 +10,6 @@ import s from './ContactsList.module.css';
 
 export default function ContactsList() {
   const contacts = useSelector(getFilteredContacts);
-  console.log(contacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,19 +18,18 @@ export default function ContactsList() {
 
   return (
     <ul>
-      {contacts.length > 0 &&
-        contacts.map(({ name, phone, id }) => (
-          <li className={s.item} key={id}>
-            <Contact name={name} number={phone} />
-            <button
-              className={s.button}
-              type="button"
-              onClick={() => dispatch(deleteContact(id))}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+      {contacts.map(({ name, number, id }) => (
+        <li className={s.item} key={id}>
+          <Contact name={name} number={number} />
+          <button
+            className={s.button}
+            type="button"
+            onClick={() => dispatch(deleteContact(id))}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
     </ul>
   );
 }

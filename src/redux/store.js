@@ -30,7 +30,7 @@ const authPersistConfig = {
 const authPersistReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
-    phoneBook: contactsReducer,
+    contacts: contactsReducer,
     auth: authPersistReducer,
     filter: filterReducer,
   },

@@ -13,11 +13,11 @@ export const filterReducer = createReducer('', {
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { contactItems: [], loading: false, error: null },
+  initialState: { contacts: [], loading: false, error: null },
   extraReducers: {
     [fetchContacts.fulfilled]: (state, { payload }) => ({
       ...state,
-      contactItems: payload,
+      contacts: payload,
       loading: false,
       error: null,
     }),
@@ -34,7 +34,7 @@ const contactsSlice = createSlice({
 
     [addContact.fulfilled]: (state, { payload }) => ({
       ...state,
-      contactItems: [...state.contactItems, payload],
+      contacts: [...state.contacts, payload],
       loading: false,
       error: null,
     }),
@@ -51,10 +51,9 @@ const contactsSlice = createSlice({
 
     [deleteContact.fulfilled]: (state, { payload }) => ({
       ...state,
-      contactItems: state.contactItems.filter(({ id }) => id !== payload),
-      loading: false,
-      error: null,
+      contacts: state.contacts.filter(({ id }) => id !== payload),
     }),
+
     [deleteContact.pending]: state => ({
       ...state,
       loading: true,

@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/Phonebook/phonebook-selectors';
 import { addContact } from '../../redux/Phonebook/phonebook-operations';
 import s from './Form.module.css';
-// import PropTypes from 'prop-types';
 
 export default function Form() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const contacts = useSelector(getContacts);
-  console.log(contacts);
   const dispatch = useDispatch();
 
   const handleInputChange = e => {
@@ -18,8 +16,8 @@ export default function Form() {
       case 'name':
         setName(value);
         break;
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
       default:
         return;
@@ -36,13 +34,13 @@ export default function Form() {
       return alert(`${name} is already in the directory`);
     }
 
-    dispatch(addContact({ name, phone }));
+    dispatch(addContact({ name, number }));
     reset();
   };
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -61,25 +59,21 @@ export default function Form() {
         />
       </label>
       <label className={s.label}>
-        Phone
+        Phone number
         <input
-          value={phone}
+          value={number}
           className={s.input}
           onChange={handleInputChange}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
         />
       </label>
       <button className={s.button} type="submit">
-        <span className={s.btnText}> Add contacts</span>
+        <span className={s.btnText}> Add contact</span>
       </button>
     </form>
   );
 }
-
-// Form.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };

@@ -21,6 +21,7 @@ const authSlice = createSlice({
       state.user = payload.user;
       state.token = payload.token;
       state.isAuth = true;
+      // state.isGetCurrentUser = true;
     },
     [logOut.fulfilled](state, { payload }) {
       state.user = { name: '', email: '' };
