@@ -5,8 +5,8 @@ import s from './Navigation.module.css';
 const Navigation = () => (
   <nav>
     <NavLink
-      exact
       to="/"
+      exact
       className={s.link}
       activeClassName={s.activeLink}
       // className={({ isActive }) => (isActive ? s.activeLink : s.link)}
@@ -16,11 +16,12 @@ const Navigation = () => (
 
     <NavLink
       to="/contacts"
+      exact
       className={s.link}
       activeClassName={s.activeLink}
       // className={({ isActive }) => (isActive ? s.activeLink : s.link)}
     >
-      PhoneBook
+      Phonebook
     </NavLink>
   </nav>
 );

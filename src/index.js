@@ -9,7 +9,7 @@ import App from './components/App';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<h2>Wait,loading</h2>} persistor={persistor}>
+      <PersistGate loading={<h2>Wait,loading...</h2>} persistor={persistor}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

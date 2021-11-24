@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registration } from '../../redux/auth/auth-operations';
+import { register } from '../../redux/auth/auth-operations';
 import { BtnSubmit } from '../../components/BtnSubmit/BtnSubmit';
 import s from './Registration.module.css';
 
@@ -25,16 +25,17 @@ export default function RegisterView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(registration({ name, email, password }));
+    dispatch(register({ name, email, password }));
+    reset();
+  };
+  const reset = () => {
     setName('');
     setEmail('');
     setPassword('');
   };
-
   return (
     <>
       <h2 className={s.title}>Create account</h2>
-
       <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
         <label className={s.label}>
           Name

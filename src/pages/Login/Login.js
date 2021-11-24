@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/auth/auth-operations';
-import s from './Login.module.css';
 import { BtnSubmit } from '../../components/BtnSubmit/BtnSubmit';
+import { logIn } from '../../redux/auth/auth-operations';
+import s from './Login.module.css';
 
-export default function LoginView() {
+export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,14 +22,16 @@ export default function LoginView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(logIn({ email, password }));
+    reset();
+  };
+  const reset = () => {
     setEmail('');
     setPassword('');
   };
-
   return (
-    <div>
-      <h2 className={s.title}>Log in to your account</h2>
+    <>
+      <h2 className={s.title}>Login Form</h2>
 
       <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
         <label className={s.label}>
@@ -58,6 +60,6 @@ export default function LoginView() {
 
         {/* <button type="submit">Sign in</button> */}
       </form>
-    </div>
+    </>
   );
 }

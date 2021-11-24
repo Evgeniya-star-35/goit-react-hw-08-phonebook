@@ -7,6 +7,7 @@ export default function AuthNav() {
     <div>
       <NavLink
         to="/register"
+        exact
         className={s.link}
         activeClassName={s.activeLink}
         // className={({ isActive }) => (isActive ? s.activeLink : s.link)}
@@ -15,6 +16,7 @@ export default function AuthNav() {
       </NavLink>
       <NavLink
         to="/login"
+        exact
         className={s.link}
         activeClassName={s.activeLink}
         // className={({ isActive }) => (isActive ? s.activeLink : s.link)}

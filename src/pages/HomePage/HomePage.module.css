@@ -1,11 +1,9 @@
-
-  
-  .title {
+.title {
     font-weight: 500;
-    font-size: 60;
+    font-size: 150px;
     text-align: center;
     margin-top: 150px;
     text-shadow:3px 3px 10px red,-3px -3px 10px yellow;
     color: rgb(57, 91, 202);
   }
- 
+  

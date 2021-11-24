@@ -4,7 +4,9 @@
   .title{
     margin-top: 15px;
     color: rgb(79, 121, 189);
+    text-shadow:3px 3px 10px red,-3px -3px 10px yellow;
   }
+  
   .label{
       display: flex;
     flex-direction: column;
@@ -13,6 +15,9 @@
     margin-bottom: 15;
     color: rgb(67, 140, 236);
 }
+.label:hover{
+  text-shadow:3px 3px 10px red,-3px -3px 10px yellow;
+}
 .input{
   width: 250px;
   height: 26px;
@@ -20,4 +25,7 @@
   margin-bottom: 10px;
   border-radius: 10px;
   outline: none;
+}
+.input:focus-within {
+  border: 3px solid rgb(67, 140, 236);
 }

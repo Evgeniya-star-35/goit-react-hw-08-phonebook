@@ -1,43 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registration, logOut, login, getCurrentUser } from './auth-operations';
+import { register, logOut, logIn, getCurrentUser } from './auth-operations';
 
 const initialState = {
-  user: { name: null, email: null },
-  token: null,
-  isLoggerIn: false,
+  user: { name: '', email: '' },
+  token: '',
+  isAuth: false,
   isGetCurrentUser: false,
 };
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  extraReducer: {
-    [registration.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+  extraReducers: {
+    [register.fulfilled](state, { payload }) {
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isAuth = true;
     },
-    [login.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+    [logIn.fulfilled](state, { payload }) {
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isAuth = true;
     },
-    [logOut.fulfilled](state, action) {
-      state.user = { name: null, email: null };
-      state.token = null;
-      state.isLoggedIn = false;
+    [logOut.fulfilled](state, { payload }) {
+      state.user = { name: '', email: '' };
+      state.token = '';
+      state.isAuth = false;
     },
     [getCurrentUser.pending](state) {
-      state.isFetchingCurrentUser = true;
+      state.isGetCurrentUser = true;
     },
-    [getCurrentUser.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      state.isLoggedIn = false;
+    [getCurrentUser.fulfilled](state, { payload }) {
+      state.user = payload;
+      state.isAuth = true;
+      state.isGetCurrentUser = false;
     },
-
     [getCurrentUser.rejected](state) {
-      state.isFetchingCurrentUser = false;
+      state.isGetCurrentUser = false;
     },
   },
 });
+
 export default authSlice.reducer;

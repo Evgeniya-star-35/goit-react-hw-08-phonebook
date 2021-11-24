@@ -1,6 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-// import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/Phonebook/phonebook-selectors';
 import { addContact } from '../../redux/Phonebook/phonebook-operations';
@@ -11,17 +9,8 @@ export default function Form() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const contacts = useSelector(getContacts);
+  console.log(contacts);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const goToContacts = useRef(false);
-
-  useEffect(() => {
-    if (!goToContacts.current) {
-      goToContacts.current = true;
-      return;
-    }
-    history.push('/contacts');
-  }, [history, contacts]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -46,11 +35,7 @@ export default function Form() {
       reset();
       return alert(`${name} is already in the directory`);
     }
-    // const contact = {
-    //   id: uuidv4(),
-    //   name,
-    //   number,
-    // };
+
     dispatch(addContact({ name, phone }));
     reset();
   };

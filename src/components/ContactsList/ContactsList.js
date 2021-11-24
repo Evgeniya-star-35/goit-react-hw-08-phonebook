@@ -1,7 +1,7 @@
 import Contact from '../Contact';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFiltredContacts } from '../../redux/Phonebook/phonebook-selectors';
+import { getFilteredContacts } from '../../redux/Phonebook/phonebook-selectors';
 import {
   fetchContacts,
   deleteContact,
@@ -9,7 +9,8 @@ import {
 import s from './ContactsList.module.css';
 
 export default function ContactsList() {
-  const contacts = useSelector(getFiltredContacts);
+  const contacts = useSelector(getFilteredContacts);
+  console.log(contacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,18 +19,19 @@ export default function ContactsList() {
 
   return (
     <ul>
-      {contacts.map(({ name, phone, id }) => (
-        <li className={s.item} key={id}>
-          <Contact name={name} number={phone} />
-          <button
-            className={s.button}
-            type="button"
-            onClick={() => dispatch(deleteContact(id))}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
+      {contacts.length > 0 &&
+        contacts.map(({ name, phone, id }) => (
+          <li className={s.item} key={id}>
+            <Contact name={name} number={phone} />
+            <button
+              className={s.button}
+              type="button"
+              onClick={() => dispatch(deleteContact(id))}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
     </ul>
   );
 }
